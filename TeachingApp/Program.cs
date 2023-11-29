@@ -46,9 +46,9 @@ catch (Exception e)
     Console.WriteLine(e.Message);
 }
 
-//ffdffg
-int a;
-int b;
+ShopItem item1 = new ShopItem();
+item1.Tags = new List<ItemTag>();
+
 
 double moneyBalance = 20.0;
 
@@ -61,6 +61,8 @@ while (true)
 
     string inputext = Console.ReadLine() ?? "";
     string[] splitText= inputext.Split(" ");
+
+
 
     Console.Clear();
     switch (splitText[0])
