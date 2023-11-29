@@ -6,7 +6,7 @@ namespace TeachingApp.Models
 {
     internal class ShopItem
     {
-        public string Name { get; set; }
+        public string Name { get; init; }
         public string Description { get; set; }
 
         public List<ItemTag> Tags { get; set; }
