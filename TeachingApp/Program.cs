@@ -48,6 +48,7 @@ catch (Exception e)
 
 //ffdffg
 int a;
+int b;
 
 double moneyBalance = 20.0;
 
