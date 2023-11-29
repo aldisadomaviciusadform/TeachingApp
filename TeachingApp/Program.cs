@@ -46,6 +46,8 @@ catch (Exception e)
     Console.WriteLine(e.Message);
 }
 
+//ffdffg
+int a;
 
 double moneyBalance = 20.0;
 
