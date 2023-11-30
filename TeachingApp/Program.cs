@@ -24,22 +24,20 @@ That means when you restart the information does not dissappear.
 Console messages should be logical
 */
 
+using System.Diagnostics;
+using TeachingApp.Interfaces;
 using TeachingApp.Models;
 using TeachingApp.Services;
 
 
-ItemBasket shopBasket = new ItemBasket();
-ItemBasket myBasket = new ItemBasket();
-ShopItemFileService fileService = new ShopItemFileService();
+ItemBasket shopBasket = new ItemBasket("shop");
+ItemBasket myBasket = new ItemBasket("user");
+
 
 try
 {
-    foreach (var item in fileService.LoadItems("shop.txt"))
-        shopBasket.AddItem(item.Name, item.Price);
-
-    foreach (var item in fileService.LoadItems("user.txt"))
-        myBasket.AddItem(item.Name, item.Price);
-
+    shopBasket.LoadItems();
+    myBasket.LoadItems();
 }
 catch (Exception e)
 {
@@ -47,10 +45,10 @@ catch (Exception e)
 }
 
 ShopItem item1 = new ShopItem();
-item1.Tags = new List<ItemTag>();
-
+item1.Tags.Add(new ItemTag(1,""));
 
 double moneyBalance = 20.0;
+Stopwatch stopwatch = new Stopwatch();
 
 while (true)
 {
@@ -62,7 +60,7 @@ while (true)
     string inputext = Console.ReadLine() ?? "";
     string[] splitText= inputext.Split(" ");
 
-
+    stopwatch.Start();
 
     Console.Clear();
     switch (splitText[0])
@@ -202,8 +200,8 @@ while (true)
             
             try
             {
-                fileService.SaveItems(shopBasket.Items, "shop.txt");
-                fileService.SaveItems(myBasket.Items, "user.txt");
+                shopBasket.SaveItems();
+                myBasket.SaveItems();
             }
             catch (Exception e)
             {
@@ -216,6 +214,10 @@ while (true)
             BadInput();
             break;
     }
+
+    stopwatch.Stop();
+
+    Console.WriteLine(stopwatch.ElapsedMilliseconds + "ms");
 }
 
 void BadInput()
@@ -223,50 +225,3 @@ void BadInput()
     Console.WriteLine("Bad input");
     Console.WriteLine();
 }
-
-/*
-ShopBasket shopBasket = new ShopBasket();
-
-shopBasket.AddItem(new ShopItem("kava", "gardi kava", 5.99, [
-                                                                new ItemTag(1, "maistas"),
-                                                                new ItemTag(2, "gerimas"),
-                                                                new ItemTag(3, "gardu"),
-                                                                new ItemTag(4, "skanu")
-                                                            ]
-                                                            ));
-
-shopBasket.AddItem(new ShopItem("arbata", "normali arbata", 1.99, [
-                                                                    new ItemTag(1, "maistas"),
-                                                                    new ItemTag(2, "gerimas")
-                                                                ]
-                                                            ));
-
-shopBasket.AddItem(new ShopItem("kakava", "sokoladine kava", 10.09, [
-                                                                        new ItemTag(1, "maistas"),
-                                                                        new ItemTag(2, "gerimas"),
-                                                                        new ItemTag(3, "skanu")
-                                                                    ]
-                                                            ));
-
-shopBasket.AddItem(new ShopItem("bananas", "is afrikos", 0.39, [
-                                                                    new ItemTag(1, "maistas"),
-                                                                    new ItemTag(2, "prinokes"),
-                                                                ]
-                                                            ));
-
-
-//clean file
-File.WriteAllText("Sarasas.txt", string.Empty);
-
-shopBasket.MatchingTags();
-*/
-
-
-/*
-foreach (ShopItem item in shopBasket.Items)
-{    
-    item.PrintToFile();
-    List<string> matchedTags = item.MatchingTags(shopBasket);
-    int i = 1;
-}
-*/

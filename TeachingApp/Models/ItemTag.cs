@@ -8,8 +8,8 @@ namespace TeachingApp.Models
 {
     internal class ItemTag
     {
-        public int ID { get; }
-        public string Name { get; }
+        public int ID { get; init; }
+        public string Name { get; init; }
 
         public ItemTag(int id, string name)
         {

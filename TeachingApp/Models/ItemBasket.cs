@@ -1,4 +1,5 @@
 ﻿using TeachingApp.Interfaces;
+using TeachingApp.Services;
 
 namespace TeachingApp.Models
 {
@@ -7,9 +8,14 @@ namespace TeachingApp.Models
         private List<ShopItem> _items;
         public IEnumerable<ShopItem> Items { get { return _items; } }
 
-        public ItemBasket() 
+        public IShopItemFileService fileService = new ShopItemFileService();
+
+        string BasketName;
+
+        public ItemBasket(string basketName) 
         {
             _items = new List<ShopItem>();
+            BasketName = basketName;
         }
 
         public void AddItem(string itemName, double price)
@@ -57,6 +63,16 @@ namespace TeachingApp.Models
             foreach (ItemTag item in matchingList)
                 Console.WriteLine(item.Name);
 
+        }
+
+        public void SaveItems()
+        {
+            fileService.SaveItems<ShopItem>(_items, BasketName+".txt");
+        }
+
+        public void LoadItems()
+        {
+            _items=fileService.LoadItems<ShopItem>(BasketName + ".txt");
         }
     }
 }
