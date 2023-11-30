@@ -7,11 +7,11 @@ namespace TeachingApp.Models
     internal class ShopItem
     {
         public string Name { get; init; }
-        public string Description { get; set; }
+        public string Description { get; init; }
 
-        public List<ItemTag> Tags { get; set; }
+        public List<ItemTag> Tags { get; init; }
 
-        public double Price { get;  set; }
+        public double Price { get; init; }
 
         public ShopItem()
         {
@@ -55,11 +55,6 @@ namespace TeachingApp.Models
                 text += tag.Name + " ";
             }
             return text;
-        }
-
-        public void ChangePrice(double newPrice)
-        {
-            Price = newPrice;
         }
 
         public List<ItemTag> MatchedTagList(List<ItemTag> tags)

@@ -18,6 +18,7 @@ namespace TeachingApp.Services
 
             try
             {
+
                 List<ShopItem> items = new List<ShopItem>();
                 var data = File.ReadAllLines(fileName);                
                 foreach (string jsonString in data)

@@ -47,8 +47,7 @@ catch (Exception e)
 }
 
 ShopItem item1 = new ShopItem();
-item1.Tags = new List<ItemTag>();
-
+item1.Tags.Add(new ItemTag(1,""));
 
 double moneyBalance = 20.0;
 
