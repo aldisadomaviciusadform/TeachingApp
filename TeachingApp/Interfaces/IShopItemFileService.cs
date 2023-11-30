@@ -9,8 +9,8 @@ namespace TeachingApp.Interfaces
 {
     internal interface IShopItemFileService
     {
-        public List<ShopItem> LoadItems(string fileName);
+        public List<T> LoadItems<T>(string fileName);
 
-        public void SaveItems(IEnumerable<ShopItem> items, string fileName);
+        public void SaveItems<T>(IEnumerable<T> items, string fileName);
     }
 }

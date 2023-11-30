@@ -11,7 +11,7 @@ namespace TeachingApp.Services
 {
     internal class ShopItemFileService : IShopItemFileService
     {
-        public List<ShopItem> LoadItems(string fileName)
+        public List<T> LoadItems<T>(string fileName)
         {
             if (!File.Exists(fileName))
                 throw new Exception($"File {fileName} does not exists");
@@ -19,11 +19,11 @@ namespace TeachingApp.Services
             try
             {
 
-                List<ShopItem> items = new List<ShopItem>();
+                List<T> items = new List<T>();
                 var data = File.ReadAllLines(fileName);                
                 foreach (string jsonString in data)
                 {
-                    ShopItem item = JsonSerializer.Deserialize<ShopItem>(jsonString)!;
+                    T item = JsonSerializer.Deserialize<T>(jsonString)!;
                     if (item == null)
                         throw new Exception($"Corrupted file");
                     items.Add(item);
@@ -36,12 +36,12 @@ namespace TeachingApp.Services
             }
         }
 
-        public void SaveItems(IEnumerable<ShopItem> items, string fileName)
+        public void SaveItems<T>(IEnumerable<T> items, string fileName)
         {
             List<string> text = new List<string>();
-            foreach (ShopItem item in items)
+            foreach (T item in items)
             {
-                string jsonString = JsonSerializer.Serialize<ShopItem>(item);
+                string jsonString = JsonSerializer.Serialize<T>(item);
                 text.Add(jsonString);
             }
             File.WriteAllLines(fileName, text);            
