@@ -6,32 +6,27 @@ using System.Threading.Tasks;
 
 namespace TeachingApp2
 {
-
-
-    internal abstract class Animal
+    internal class Pet
     {
         public string Name { get; set; }
 
-        public Animal()
+        public int Age {  get; set; }
+
+        public Pet()
         {
-            
+
         }
 
-        public Animal(string name)
-        {
-            Name = name;
-        }
-
-        public void SetName(string name)
+        public Pet(string name, int age)
         {
             Name = name;
+            Age = age;
         }
 
-        public string GetName()
+        public override string ToString()
         {
-            return Name;
+            string text = Name + " " + Age.ToString();
+            return text;
         }
-
-        public abstract void Eat();
     }
 }

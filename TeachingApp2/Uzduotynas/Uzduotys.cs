@@ -28,7 +28,8 @@ namespace TeachingApp2.Uzduotynas
         {
             List<string> list = new List<string>();
             Random random = new Random();
-            Random random1 = new Random();
+            Random random1 = new Random(); 
+
             for (int i = 0; i < count; i++)
             {
                 List<char> word = new List<char>();
