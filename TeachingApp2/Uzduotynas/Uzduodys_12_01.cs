@@ -138,9 +138,9 @@ Failų formatas gali būti keičiamas jūsų nuožiūra, galima naudoti json.
 
             for (int i = 0; i < fileCount; i++)
             {
-                int wordCount = uzduotys.RandomizerInt(1, 100, 5000)[0];
+                int wordCount = uzduotys.RandomizerInt(1, 100, 8000)[0];
 
-                List<string> texts = uzduotys.RandomizerString(wordCount, 5, 20);
+                List<string> texts = uzduotys.RandomizerNormalString(wordCount);
 
                 StringBuilder stringBuilder = new StringBuilder();
 

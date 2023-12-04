@@ -32,29 +32,57 @@ Failų formatas gali būti keičiamas jūsų nuožiūra, galima naudoti json.
                             await Task.Delay(1000);
                         }
             */
-            int fileCount = 60;
+            int fileCount = 50;
             List <FileReaderAsync> fileReaders = new List <FileReaderAsync> ();
-
-            for (int i = 10; i < fileCount; i++)
+            List<string> textToFind = new List<string>()
             {
-                string path = i.ToString() + ".txt";
-                fileReaders.Add(new FileReaderAsync(path));
-                fileReaders[i-10].Read();
+                "Apple", "Banana", "Computer", "Elephant", "Mountain",
+                "Sunshine", "Butterfly", "Universe",
+                "Serenity", "Chocolate", "Tranquility", "Moonlight", "Sparkle",
+                "Freedom", "Joyful", "Elegant", "Laughter", "Spectacular",
+                "Symphony", "Breathtaking", "Refreshing", "Rainbow", "Enchanting",
+                "Mystery", "Whimsical", "Lighthouse", "Delicious", "Celebration",
+                "Radiant", "Ocean", "Vibrant", "Majestic", "Inspire",
+                "Wisdom", "Blissful", "Adventure", "Serendipity", "Effervescent",
+                "Tranquil", "Blossom", "Graceful", "Melody", "Journey",
+                 "Whisper",  "Pinnacle", "Soothing",
+                "Quaint", "Twilight", "Cherish", "Amethyst", "Rejoice",
+                "Velvet", "Harmony",  "Felicity",
+                "Zenith", "Cascade", "Uplift", "Mellifluous", "Scintillate",
+                "Aurora", "Ethereal", "Jubilant", "Piquant", "Enigma",
+                "Delight", "Illuminate", "Euphoria", "Cherub", "Radiance",
+                "Ponder", "Bountiful", "Luminous", "Resplendent", "Eloquent",
+                "Opulent", "Quiescent", "Ineffable", "Grace",
+                "Nectar", "Panorama", "Inquisitive", "Lullaby", "Oasis",
+                "Cacophony", "Petrichor", "Enchant", "Bliss", "Jubilee",
+                "Halcyon", "Enthralling", "Gossamer", "Solace", "Panache"
+            };
+
+            for (int i = 0; i < fileCount; i++)
+            {
+                string path = (i+10).ToString() + ".txt";
+                fileReaders.Add(new FileReaderAsync(path,textToFind));
+                fileReaders[i].Read();
             }
 
-            bool done = true;
-            while (done)
+            bool done = false;
+            int count = 0;
+            while (!done)
             {
+                count = 0;
                 done = true;
                 foreach (FileReaderAsync reader in fileReaders)
                 {
-                    if(reader.busy)
+                    if (reader.Busy)
                         done = false;
+                    else
+                        count++;
                 }
+                await Task.Delay(100);
             }
 
+            Console.WriteLine("Pabaiga");
             Console.ReadLine();
-
         }
     }
 }
