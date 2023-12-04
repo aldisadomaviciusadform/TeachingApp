@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeachingApp", "TeachingApp\TeachingApp.csproj", "{5436B607-4F84-4E97-943E-A3E5D623FD4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopConsole", "TeachingApp\ShopConsole.csproj", "{5436B607-4F84-4E97-943E-A3E5D623FD4A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeachingApp2", "TeachingApp2\TeachingApp2.csproj", "{459B79D1-A497-4E2B-AF20-52DDD6793359}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RandomUzduotys", "TeachingApp2\RandomUzduotys.csproj", "{459B79D1-A497-4E2B-AF20-52DDD6793359}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncConsoleApp", "AsyncConsoleApp\AsyncConsoleApp.csproj", "{40195854-5C42-4FC2-A099-46D6AB692A37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeachingAPI", "TeachingAPI\TeachingAPI.csproj", "{E9F81603-DFAC-40BD-A9EC-3100C6BD8E3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopAPI", "TeachingAPI\ShopAPI.csproj", "{E9F81603-DFAC-40BD-A9EC-3100C6BD8E3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

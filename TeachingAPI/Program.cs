@@ -1,6 +1,6 @@
-
+using ShopAPI.Interfaces;
+using ShopAPI.Respositories;
 using TeachingAPI.Interfaces;
-using TeachingAPI.Respositories;
 using TeachingAPI.Services;
 
 namespace TeachingAPI
@@ -17,8 +17,8 @@ namespace TeachingAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddTransient<IDarbuotojasRepository, DarbuotojasRepository>();
-            builder.Services.AddTransient<IDarbuotojasService, DarbuotojaiService >();
+            builder.Services.AddTransient<IShopItemService, ShopItemService>();
+            builder.Services.AddTransient<IShopItemRepository, ShopItemRepository>();
 
             var app = builder.Build();
 
@@ -32,7 +32,6 @@ namespace TeachingAPI
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

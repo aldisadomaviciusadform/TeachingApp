@@ -1,12 +1,6 @@
-﻿using Dapper;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
-using Npgsql;
-using System.Xml.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 using TeachingAPI.Interfaces;
-using TeachingAPI.NewFolder;
-using TeachingAPI.Respositories;
+using TeachingAPI.Models;
 
 namespace TeachingAPI.Controllers
 {
@@ -14,39 +8,126 @@ namespace TeachingAPI.Controllers
     [Route("[controller]/[action]")]
     public class HomeController : ControllerBase
     {
-        /*
-            Sukurkite API ir prijunkite savo lokalią postgre duomenų bazę prie šio projekto.
-            Sukurkite endpointą įdėti naujam darbuotojui.
-            Sukurkite endpointą gauti visiems darbuotojams. 
-        */
+        private readonly IShopItemService _shopItemService;
 
-        private readonly IDarbuotojasService _darbuotojasService;
-
-        public HomeController(IDarbuotojasService darbuotojasService)
+        public HomeController(IShopItemService shopItemService)
         {
-             _darbuotojasService = darbuotojasService;
+            _shopItemService = shopItemService;
+        }
+
+        /*
+Create new API for Shop ITem (Similar to console application)
+ShopItem should have Name, Price (use decimal type), CreatedDate (should be populate by default)
+ 
+Create ShopItem table inside new or existing database
+ 
+Please allow the following actions:
+Create (HttpPost)
+GetAll (HttpGet)
+GetById (HttpGet)
+Delete (HttpDelete)
+Update (HttpPut)
+ 
+The data must be written into database trough repository layer
+https://codewithmukesh.com/blog/repository-pattern-in-aspnet-core/
+Controller -> Service -> Repository
+ 
+API should include Error Handling
+ 
+Actions should return correct StatusCodes.
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+ 
+ 
+Price should be validated (no less then 0) (using data validations)
+https://code-maze.com/aspnetcore-modelstate-validation-web-api/
+ 
+Extra Hard***
+Use DBUP to automatically create table
+         */
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                var items = _shopItemService.ShowItems();
+                if (items == null)
+                    return NoContent();
+                else
+                    return Ok(items);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpGet]
-        public async Task<IActionResult> Getas(string name)
+        public async Task<IActionResult> GetById(int id)
         {
-            var returnas = _darbuotojasService.GetDarbuotojas();
-            return Ok(returnas);
+            try
+            {
+                ShopItem item = _shopItemService.GetItem(id);
+                if (item == null)
+                    return NoContent();
+                else
+                    return Ok(item);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPost]
-        public async Task<IActionResult>Posts([FromBody] Darbuotojas darbuotojas)
+        public async Task<IActionResult> Create([FromBody] ShopItem shopitem)
         {
-            return Ok(_darbuotojasService.InsertDarbuotojas(darbuotojas));
+            try
+            {
+                bool success = _shopItemService.AddItem(shopitem);
+                if (!success)
+                    return BadRequest();
+                else
+                    return Created();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] Darbuotojas darbuotojas)
+        public async Task<IActionResult> Update([FromBody] ShopItem shopitem)
         {
-            if (_darbuotojasService.ModifyDarbuotojas(darbuotojas) == 0)
+            try
+            {
+                bool success = _shopItemService.UpdateItem(shopitem);
+                if (!success)
+                    return BadRequest();
+                else
+                    return Ok();
+            }
+            catch (Exception)
+            {
                 return BadRequest();
-            else
-                return Ok();
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                bool success = _shopItemService.RemoveItem(id);
+                if (!success)
+                    return BadRequest();
+                else
+                    return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
     }
 }
