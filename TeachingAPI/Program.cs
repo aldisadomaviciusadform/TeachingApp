@@ -1,5 +1,8 @@
+using Microsoft.Extensions.Configuration;
+using Npgsql;
 using ShopAPI.Interfaces;
 using ShopAPI.Respositories;
+using System.Data;
 using TeachingAPI.Interfaces;
 using TeachingAPI.Services;
 
@@ -19,6 +22,12 @@ namespace TeachingAPI
             builder.Services.AddSwaggerGen();
             builder.Services.AddTransient<IShopItemService, ShopItemService>();
             builder.Services.AddTransient<IShopItemRepository, ShopItemRepository>();
+
+            string dbConnectionString = builder.Configuration.GetConnectionString("PostgreConnection");
+
+            // Inject IDbConnection, with implementation from SqlConnection class.
+            builder.Services.AddTransient<IDbConnection>(sp => new NpgsqlConnection(dbConnectionString));
+
 
             var app = builder.Build();
 

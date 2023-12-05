@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ShopAPI.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace TeachingAPI.Models
 {
@@ -14,27 +15,15 @@ namespace TeachingAPI.Models
 
         public ShopItem()
         {
-            Id = 0;
-            Name = "";
-            Description = "";
-            Price = 0;
-            CreatedDate = DateTime.Now;
+            
         }
-
-        public ShopItem(int id, string name, string description, decimal price)
+        public ShopItem(AddShopItem itemAdd)
         {
-            Id = id;
-            Name = name;
-            Description = description;
-            Price = price;
+            Id = itemAdd.Id;
+            Name = itemAdd.Name;
+            Description = itemAdd.Description;
+            Price = itemAdd.Price;
             CreatedDate = DateTime.Now;
-        }
-
-        public override string ToString()
-        {
-            string text = "Name: " + Name + ",Description: " + Description + ",Price: " + Price.ToString() + ",Tags: ";
-
-            return text;
         }
     }
 }

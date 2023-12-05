@@ -1,4 +1,5 @@
 ﻿using ShopAPI.Interfaces;
+using ShopAPI.Models;
 using TeachingAPI.Interfaces;
 using TeachingAPI.Models;
 
@@ -13,9 +14,9 @@ namespace TeachingAPI.Services
             _shopItemRepository = shopItemRepository;
         }
 
-        public bool AddItem(ShopItem item)
+        public bool AddItem(AddShopItem inputItem)
         {
-            item.CreatedDate = DateTime.Now;
+            ShopItem item = new ShopItem(inputItem);
             return _shopItemRepository.AddItem(item);
         }
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShopAPI.Models;
 using TeachingAPI.Interfaces;
 using TeachingAPI.Models;
 
@@ -6,6 +7,7 @@ namespace TeachingAPI.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]")]
+
     public class HomeController : ControllerBase
     {
         private readonly IShopItemService _shopItemService;
@@ -45,6 +47,11 @@ Extra Hard***
 Use DBUP to automatically create table
          */
 
+        private IActionResult ExceptionResponceHandlers(Exception exception)
+        {
+            return BadRequest(exception.Message);
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -56,9 +63,10 @@ Use DBUP to automatically create table
                 else
                     return Ok(items);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+                string message = e.Message;
+                return ExceptionResponceHandlers(e);
             }
         }
 
@@ -73,9 +81,10 @@ Use DBUP to automatically create table
                 else
                     return Ok(item);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+                string message = e.Message; 
+                return ExceptionResponceHandlers(e);
             }
         }
 
@@ -84,15 +93,16 @@ Use DBUP to automatically create table
         {
             try
             {
-                bool success = _shopItemService.AddItem(shopitem);
+                bool success = true;//_shopItemService.AddItem(shopitem);
                 if (!success)
                     return BadRequest();
                 else
                     return Created();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+                string message = e.Message;
+                return ExceptionResponceHandlers(e);
             }
         }
 
@@ -107,9 +117,10 @@ Use DBUP to automatically create table
                 else
                     return Ok();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+                string message = e.Message;
+                return ExceptionResponceHandlers(e);
             }
         }
 
@@ -124,9 +135,10 @@ Use DBUP to automatically create table
                 else
                     return Ok();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+                string message = e.Message;
+                return ExceptionResponceHandlers(e);
             }
         }
     }
