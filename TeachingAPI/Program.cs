@@ -31,7 +31,7 @@ namespace TeachingAPI
             builder.Services.AddTransient<IShopItemRepository, ShopItemRepository>();
             builder.Services.AddTransient<IShopItmesService, ShopItemsService>();
 
-
+            //
             string dbConnectionString = builder.Configuration.GetConnectionString("PostgreConnection");
 
             // Inject IDbConnection, with implementation from SqlConnection class.
