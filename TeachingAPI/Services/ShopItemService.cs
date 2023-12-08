@@ -9,7 +9,7 @@ namespace TeachingAPI.Services
     {
         private readonly IShopItemRepository _shopItemRepository;
 
-        public ShopItemService(IShopItemRepository shopItemRepository)
+        public ShopItemService(IShopItemRepository shopItemRepository, ILogger<ShopItemService> logger)
         {
             _shopItemRepository = shopItemRepository;
         }

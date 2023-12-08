@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShopAPI.Interfaces;
 using ShopAPI.Models;
 using TeachingAPI.Interfaces;
 using TeachingAPI.Models;
@@ -11,10 +12,12 @@ namespace TeachingAPI.Controllers
     public class HomeController : ControllerBase
     {
         private readonly IShopItemService _shopItemService;
+        private readonly IWeatherService _weatherService;
 
-        public HomeController(IShopItemService shopItemService)
+        public HomeController(IShopItemService shopItemService, IWeatherService weatherService)
         {
             _shopItemService = shopItemService;
+            _weatherService = weatherService;
         }
 
         /*
@@ -50,6 +53,20 @@ Use DBUP to automatically create table
         private IActionResult ExceptionResponceHandlers(Exception exception)
         {
             return BadRequest(exception.Message);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetWeather(string city)
+        {
+            try
+            {
+                return Ok(await _weatherService.GetWeatherResponseAsync(city));
+            }
+            catch (Exception e)
+            {
+                string message = e.Message;
+                return ExceptionResponceHandlers(e);
+            }
         }
 
         [HttpGet]
