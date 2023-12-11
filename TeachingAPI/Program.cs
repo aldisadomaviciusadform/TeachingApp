@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ShopAPI.Data;
 using ShopAPI.Services;
 using Serilog;
+using ShopAPI.Middlewares;
 
 namespace TeachingAPI
 {
@@ -50,14 +51,14 @@ namespace TeachingAPI
             builder.Services.AddScoped<IWeatherService, WeatherService>();
             builder.Services.AddScoped<IWeatherRepository, WeatherRepository>();
 
-            var app = builder.Build();
-
+            var app = builder.Build();            
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseMiddleware<ErrorMiddleware>();
 
             app.UseHttpsRedirection();
 
@@ -65,6 +66,9 @@ namespace TeachingAPI
 
             app.MapControllers();
 
+
+
+            app.AuthenticateUrl();
             app.Run();
         }
     }

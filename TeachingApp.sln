@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncConsoleApp", "AsyncCon
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopAPI", "TeachingAPI\ShopAPI.csproj", "{E9F81603-DFAC-40BD-A9EC-3100C6BD8E3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopAPITest", "ShopAPITest\ShopAPITest.csproj", "{942E9797-A1BD-42C1-97ED-2C9BA4585383}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopAPITest", "ShopAPITest\ShopAPITest.csproj", "{942E9797-A1BD-42C1-97ED-2C9BA4585383}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileAPI", "FileAPI\FileAPI.csproj", "{83F0ECBB-CF7E-42A7-AC61-16296BBF4299}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{942E9797-A1BD-42C1-97ED-2C9BA4585383}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{942E9797-A1BD-42C1-97ED-2C9BA4585383}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{942E9797-A1BD-42C1-97ED-2C9BA4585383}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83F0ECBB-CF7E-42A7-AC61-16296BBF4299}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83F0ECBB-CF7E-42A7-AC61-16296BBF4299}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83F0ECBB-CF7E-42A7-AC61-16296BBF4299}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83F0ECBB-CF7E-42A7-AC61-16296BBF4299}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
